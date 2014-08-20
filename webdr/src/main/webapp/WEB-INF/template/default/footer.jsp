@@ -1,0 +1,1 @@
+<div id="footer">I am the Footer !</div>
