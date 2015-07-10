@@ -1,4 +1,4 @@
-<jsp:include page="/comun/include.html" flush="true"/>
+<jsp:include page="/comun/include.jsp" flush="true"/>
 <title>.:: PORTAL PROVEEDORES ::.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="description" content="">
