@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,6 +23,7 @@ import com.amm.webdr.service.RoleService;
 
 @Controller
 @RequestMapping("/admin/roles")
+//@PreAuthorize("denyAll")
 public class RoleController {
 	
 	protected Log logger = LogFactory.getLog(getClass());
@@ -35,6 +37,7 @@ public class RoleController {
 	}	
 	
 	@RequestMapping(method = RequestMethod.GET)
+	//@PreAuthorize("hasRole('ROLE_RIGHT_ROLES_LIST_GET')")
 	public String Index(Map<String, Object> map) {
 		map.put("command", new Role(true));
 		//map.put("list", roleService.list());

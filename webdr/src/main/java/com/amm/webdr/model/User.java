@@ -1,5 +1,6 @@
 package com.amm.webdr.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,12 +13,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import com.amm.webdr.security.CustomAuthority;
 import com.amm.webdr.service.validation.FieldMatch;
 
 @NamedQueries({
@@ -33,7 +38,12 @@ import com.amm.webdr.service.validation.FieldMatch;
 
 @Entity
 @Table(name="User")
-public class User {
+public class User implements UserDetails{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @Column(name="idUser")
@@ -63,6 +73,18 @@ public class User {
     @ForeignKey(name = "FK_User_Roles", 
                 inverseName="FK_Role_Users")      
     private Set<Role> roles = new HashSet<Role>();
+	
+	/* Spring Security fields*/
+//  private List<Role> authorities;
+	
+	@Transient
+	private final String PERMISSION_PREFIX = "ROLE_RIGHT_";
+	@Transient
+    private boolean accountNonExpired = true;
+	@Transient
+    private boolean accountNonLocked = true;
+	@Transient
+    private boolean credentialsNonExpired = true;
 	
 	public User(){
 		
@@ -119,4 +141,34 @@ public class User {
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
+
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		Set<CustomAuthority> authorities = new HashSet<CustomAuthority>();
+        for (Role role : roles) {
+            for (Privilege privilege : role.getPrivileges()) {
+            	CustomAuthority customAuthority = new CustomAuthority(PERMISSION_PREFIX + privilege.getPrivilegename());
+                authorities.add(customAuthority);
+            }
+        }
+        return authorities;
+	}
+
+	public boolean isAccountNonExpired() {
+		return accountNonExpired;
+	}
+
+	public boolean isAccountNonLocked() {
+		return accountNonLocked;
+	}
+
+	public boolean isCredentialsNonExpired() {		
+		return credentialsNonExpired;
+	}
+
+	public boolean isEnabled() {		
+		return active;
+	}
+	
+	
+	
 }

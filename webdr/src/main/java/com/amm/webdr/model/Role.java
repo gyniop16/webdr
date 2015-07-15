@@ -1,13 +1,22 @@
 package com.amm.webdr.model;
 
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.ForeignKey;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -20,7 +29,13 @@ import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Table(name="Role")
-public class Role {
+public class Role implements Serializable{
+
+	/**
+	 * 
+	 */
+	@Transient
+	private static final long serialVersionUID = 1L;
 
 	@Id
     @Column(name="idRole")
@@ -37,6 +52,16 @@ public class Role {
 	@Column(name="description")
 	private String description;
 	
+	/*Security*/
+	@ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RolePrivilege",
+               joinColumns = {@JoinColumn(name = "idRole") },
+               inverseJoinColumns = {@JoinColumn(name = "idPrivilege")} 
+    )
+    @ForeignKey(name = "FK_Role_Privileges", 
+                inverseName="FK_Privilege_Roles")      
+    private Set<Privilege> privileges = new HashSet<Privilege>();
+		
 	public Role(){
 		
 	}
@@ -75,5 +100,17 @@ public class Role {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<Privilege> getPrivileges() {
+		return privileges;
+	}
+
+	public void setPrivileges(Set<Privilege> privileges) {
+		this.privileges = privileges;
+	}
+
+	public String getAuthority() {
+		return this.rolename;
 	}
 }

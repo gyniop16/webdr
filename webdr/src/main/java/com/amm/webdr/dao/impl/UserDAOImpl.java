@@ -53,7 +53,10 @@ public class UserDAOImpl implements UserDAO {
 		List<User> users =	(List<User>)query.list();
 		if(users != null && users.size() > 0){
 			user = users.get(0);
+			//user.setAuthorities();
 		}
 		return user;
 	}
+	
+	
 }

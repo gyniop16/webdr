@@ -7,6 +7,7 @@
     <session-factory>
         <mapping class="com.amm.webdr.model.User" />
         <mapping class="com.amm.webdr.model.Role" />
+        <mapping class="com.amm.webdr.model.Privilege" />
     </session-factory>
          
 </hibernate-configuration>
