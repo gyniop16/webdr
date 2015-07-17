@@ -60,7 +60,7 @@ public class UserController {
 		});
     }
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = {"" ,"/", "/list"}, method = RequestMethod.GET)
 	public String Index(ModelMap map) { 
 		map.put("command", new User(true));
 		return "admin/users";
@@ -84,7 +84,7 @@ public class UserController {
     	}else{
     		userService.add(model);
     	} 
-        return "redirect:/admin/users";
+        return "redirect:/admin/users/";
     }
 	
 	@RequestMapping("/delete/{idUser}")

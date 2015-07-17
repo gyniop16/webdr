@@ -36,7 +36,7 @@ public class RoleController {
  		return roleService.list();
 	}	
 	
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = {"" ,"/", "/list"}, method = RequestMethod.GET)
 	//@PreAuthorize("hasRole('ROLE_RIGHT_ROLES_LIST_GET')")
 	public String Index(Map<String, Object> map) {
 		map.put("command", new Role(true));
@@ -65,7 +65,7 @@ public class RoleController {
     		roleService.add(contact);
     	}
  
-        return "redirect:/admin/roles";
+        return "redirect:/admin/roles/";
     }
 	
 	@RequestMapping("/delete/{idRole}")

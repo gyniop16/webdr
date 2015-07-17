@@ -2,14 +2,9 @@
 
 <div class="navigation">
 	<ul>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Contact</a></li>
-		<li><a href="#">Services</a></li>
-		<li><a href="#">Products</a></li>
-		<li><a href="#">Clients</a></li>
-		<li><a href="#">About</a></li>
-		<li><a href="#">Resources</a></li>
-		<li><a href="#">Extra</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/roles">Roles</a></li>
+		<li><a href="${pageContext.request.contextPath}/admin/privileges">Privileges</a></li>		
 	</ul>
 </div>
 

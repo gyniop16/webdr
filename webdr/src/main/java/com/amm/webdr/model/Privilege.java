@@ -24,6 +24,13 @@ import org.hibernate.annotations.NamedQuery;
 @Table(name="Privilege")
 public class Privilege implements Serializable{
 	
+	public Privilege(){
+		
+	}
+	
+	public Privilege(boolean active) {
+		this.active = active;
+	}
 	
 	/**
 	 * 
