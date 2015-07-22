@@ -50,4 +50,13 @@ public class RoleServiceImpl implements RoleService{
 	public Role getByRolename(String rolename){
 		return roleDAO.getByRolename(rolename);
 	}
+
+	@Transactional
+	public void savePrivilegesPerRole(List<Role> roles) {
+		for(Role role : roles){
+			roleDAO.update(role);
+		}
+	}
+	
+	
 }

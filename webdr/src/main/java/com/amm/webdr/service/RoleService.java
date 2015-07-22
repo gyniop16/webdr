@@ -9,4 +9,6 @@ public interface RoleService extends GenericService<Role> {
 	Role getByRolename(String rolename);
 
 	List<Role> list(Boolean active);
+	
+	void savePrivilegesPerRole(List<Role> roles);
 }

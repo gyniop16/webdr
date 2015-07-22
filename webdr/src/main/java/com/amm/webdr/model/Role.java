@@ -103,6 +103,9 @@ public class Role implements Serializable{
 	}
 
 	public Set<Privilege> getPrivileges() {
+		if(null == this.privileges){
+			this.privileges = new HashSet<Privilege>();
+		}
 		return privileges;
 	}
 

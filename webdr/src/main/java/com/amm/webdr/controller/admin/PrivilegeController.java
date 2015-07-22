@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,6 +26,8 @@ public class PrivilegeController {
 
 	static Logger logger = LoggerFactory.getLogger(PrivilegeController.class);
 
+//	static final String SECTION = "PRIVILEGE";
+	
 	@Autowired
     private PrivilegeService privilegeService;
 	
@@ -34,7 +37,7 @@ public class PrivilegeController {
 	}
 	
 	@RequestMapping(value = {"" ,"/", "/list"}, method = RequestMethod.GET)
-	//@PreAuthorize("hasPrivilege('CTRL_STRATEGY_LIST_GET')")
+//	@PreAuthorize("hasPrivilege('CTRL_" + SECTION + "_LIST_GET')")
 	public String listOfPrivileges(Map<String, Object> map) {
 		logger.info("IN: Privilege/list-GET");
 
