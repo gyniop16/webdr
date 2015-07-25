@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ColumnResult;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,11 +13,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.SqlResultSetMapping;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ForeignKey;
+import org.hibernate.annotations.NamedNativeQueries;
+import org.hibernate.annotations.NamedNativeQuery;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
@@ -25,6 +29,17 @@ import org.hibernate.annotations.NamedQuery;
 	name = "getRoleByRolename",
 	query = "from Role where rolename = :rolename "
 	)
+	
+})
+
+@SqlResultSetMapping(name="deleteResult", columns = { @ColumnResult(name = "count")})
+
+@NamedNativeQueries({
+	@NamedNativeQuery(
+			name = "deleteAllPrivileges",
+			query = "delete from RolePrivilege where idPrivilege <> 0",
+			resultSetMapping = "deleteResult"
+			)
 })
 
 @Entity

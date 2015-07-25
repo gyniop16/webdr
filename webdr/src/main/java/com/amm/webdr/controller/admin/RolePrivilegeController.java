@@ -64,29 +64,30 @@ protected Log logger = LogFactory.getLog(getClass());
      String[] roleprivileges) {
 		
 		Map<Integer,Role> rolesMap = new HashMap<Integer, Role>();
-		
-		for(String roleprivilege : roleprivileges){
-			if(null != roleprivilege && !"".equals(roleprivilege)){
-				String[] rolePriv = roleprivilege.split("_"); 
-				if(rolePriv != null && rolePriv.length == 2){
-					String idRoleStr, idPrivilegeStr;
-					idRoleStr = rolePriv[0];
-					idPrivilegeStr = rolePriv[1];
-					
-					Integer idRole, idPrivilege;
-					idRole = Integer.parseInt(idRoleStr);
-					idPrivilege = Integer.parseInt(idPrivilegeStr);
-					Role role;
-					if(rolesMap.containsKey(idRole)){
-						role = rolesMap.get(idRole);
-					}else{
-						role = roleService.get(idRole);
-						role.setPrivileges(null);
-						rolesMap.put(idRole, role);
+		if(roleprivileges != null){
+			for(String roleprivilege : roleprivileges){
+				if(null != roleprivilege && !"".equals(roleprivilege)){
+					String[] rolePriv = roleprivilege.split("_"); 
+					if(rolePriv != null && rolePriv.length == 2){
+						String idRoleStr, idPrivilegeStr;
+						idRoleStr = rolePriv[0];
+						idPrivilegeStr = rolePriv[1];
+
+						Integer idRole, idPrivilege;
+						idRole = Integer.parseInt(idRoleStr);
+						idPrivilege = Integer.parseInt(idPrivilegeStr);
+						Role role;
+						if(rolesMap.containsKey(idRole)){
+							role = rolesMap.get(idRole);
+						}else{
+							role = roleService.get(idRole);
+							role.setPrivileges(null);
+							rolesMap.put(idRole, role);
+						}
+						Privilege privilege = new Privilege();
+						privilege.setIdPrivilege(idPrivilege);
+						role.getPrivileges().add(privilege);
 					}
-					Privilege privilege = new Privilege();
-					privilege.setIdPrivilege(idPrivilege);
-					role.getPrivileges().add(privilege);
 				}
 			}
 		}

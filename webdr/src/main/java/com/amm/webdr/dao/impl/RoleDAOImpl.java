@@ -60,4 +60,9 @@ public class RoleDAOImpl implements RoleDAO {
 		}
 		return contact;
 	}
+	
+	public void deleteAllPrivileges(){
+		Query query = sessionFactory.getCurrentSession().getNamedQuery("deleteAllPrivileges");
+		query.executeUpdate();
+	}
 }

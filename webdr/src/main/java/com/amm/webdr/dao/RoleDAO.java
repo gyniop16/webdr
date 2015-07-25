@@ -8,4 +8,6 @@ public interface RoleDAO extends GenericDAO<Role>{
 	public Role getByRolename(String rolename);
 	
 	public List<Role> list(Boolean active);
+	
+	public void deleteAllPrivileges();
 }

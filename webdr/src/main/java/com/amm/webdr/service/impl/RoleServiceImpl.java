@@ -53,6 +53,9 @@ public class RoleServiceImpl implements RoleService{
 
 	@Transactional
 	public void savePrivilegesPerRole(List<Role> roles) {
+		
+		roleDAO.deleteAllPrivileges();
+		
 		for(Role role : roles){
 			roleDAO.update(role);
 		}
