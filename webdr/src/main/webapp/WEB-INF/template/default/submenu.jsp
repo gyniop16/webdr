@@ -4,5 +4,6 @@
 		<li><a href="${pageContext.request.contextPath}/admin/roles">Roles</a></li>
 		<li><a href="${pageContext.request.contextPath}/admin/privileges">Privileges</a></li>
 		<li><a href="${pageContext.request.contextPath}/admin/rolesprivileges">Privileges per Role</a></li>
+		<li><a href="${pageContext.request.contextPath}/patient/home">Pacientes</a></li>
 				
 </ul>

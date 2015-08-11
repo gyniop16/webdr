@@ -59,4 +59,10 @@ public class HomeController {
         return authorities;
     }
 	
+    @RequestMapping(value="patient/home")
+    private String patientList(){
+    	return "patient/home";
+    }
+    
+    
 }
