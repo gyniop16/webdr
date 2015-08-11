@@ -12,14 +12,30 @@
 	type="text/css">
 </head>
 <body>
-	<div id="wrapper">
+	<header id="header">
 		<tiles:insertAttribute name="header" />
-		<div id="page_content">
+		<div id='cssmenu'>
 			<tiles:insertAttribute name="menu" />
-			<tiles:insertAttribute name="body" />
-			<tiles:insertAttribute name="footer" />
 		</div>
-		
+	</header>
+	
+	<div id="container">
+
+		<div id="center" class="column">
+			<tiles:insertAttribute name="body" />								
+		</div>
+
+		<nav id="left" class="column">
+			<div id="cssmenuver">
+				<tiles:insertAttribute name="submenu" />
+			</div>
+		</nav>	
+	</div>
+	
+	<div id="footer-wrapper">
+		<footer id="footer">
+			<tiles:insertAttribute name="footer" />
+		</footer>
 	</div>
 </body>
 </html>

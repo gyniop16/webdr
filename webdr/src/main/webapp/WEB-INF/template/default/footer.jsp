@@ -1,1 +1,1 @@
-<div id="footer">I am the Footer !</div>
+<p>I am the Footer !</p>
